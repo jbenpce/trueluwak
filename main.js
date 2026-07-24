@@ -1,11 +1,11 @@
-// True Luwak — i18n engine (FR · EN · IT · ES · PT) + reveal-on-scroll
+// True Luwak — i18n engine (EN default · FR · IT · ES · PT) + reveal-on-scroll
 (function () {
-  var LANGS = ['fr', 'en', 'it', 'es', 'pt'];
+  var LANGS = ['en', 'fr', 'it', 'es', 'pt'];
   var root = document.documentElement;
   var sel = document.getElementById('langSelect');
 
   function apply(lang) {
-    if (LANGS.indexOf(lang) < 0) lang = 'fr';
+    if (LANGS.indexOf(lang) < 0) lang = 'en';
     var dict = (window.TL_I18N && window.TL_I18N[lang]) || {};
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       var val = dict[el.getAttribute('data-i18n')];
@@ -20,11 +20,7 @@
 
   var lang = null;
   try { lang = localStorage.getItem('tl-lang'); } catch (e) {}
-  if (!lang) {
-    var nav = (navigator.language || 'fr').slice(0, 2).toLowerCase();
-    lang = LANGS.indexOf(nav) >= 0 ? nav : 'fr';
-  }
-  apply(lang);
+  apply(lang || 'en');
   if (sel) sel.addEventListener('change', function () { apply(sel.value); });
 })();
 
