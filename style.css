@@ -257,6 +257,73 @@ footer .foot-links a { color: var(--gold); text-decoration: none; font-size: .95
 footer .foot-links a:hover { color: var(--gold-bright); }
 footer .copy { letter-spacing: .12em; text-transform: uppercase; font-size: .72rem; }
 
+/* ---------- premium refinements ---------- */
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+::selection { background: var(--gold); color: #150d08; }
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: #170e08; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--gold-deep), #6f5327); border-radius: 6px;
+  border: 2px solid #170e08;
+}
+
+/* fine gold hairline across the very top of the page */
+body::before {
+  content: ""; position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 200;
+  background: linear-gradient(90deg, transparent, var(--gold-deep) 20%, var(--gold-bright) 50%, var(--gold-deep) 80%, transparent);
+}
+
+.brand-name { letter-spacing: .34em; }
+
+/* hero: slow cinematic zoom + ornamented eyebrow + scroll cue */
+@keyframes heroZoom { from { transform: scale(1.09); } to { transform: scale(1); } }
+.hero .scene img { animation: heroZoom 16s ease-out forwards; }
+.hero-eyebrow { display: flex; align-items: center; justify-content: center; gap: 22px; }
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ""; height: 1px; width: 70px;
+  background: linear-gradient(90deg, transparent, var(--gold-pale));
+}
+.hero-eyebrow::after { background: linear-gradient(90deg, var(--gold-pale), transparent); }
+.scroll-cue {
+  margin: 60px auto 0; width: 1px; height: 64px; position: relative;
+  background: linear-gradient(180deg, var(--gold-bright), transparent);
+}
+@keyframes cueDrop { 0% { top: 0; opacity: 1; } 80% { opacity: 1; } 100% { top: 46px; opacity: 0; } }
+.scroll-cue::after {
+  content: ""; position: absolute; left: -2px; top: 0; width: 5px; height: 5px;
+  border-radius: 50%; background: var(--gold-bright);
+  animation: cueDrop 2.2s ease-in infinite;
+}
+
+/* double-framed photos, gentle lift & zoom on hover */
+.photo-frame::after {
+  content: ""; position: absolute; inset: 10px; pointer-events: none;
+  border: 1px solid rgba(243,234,217,.22); border-radius: 2px;
+}
+.photo-frame img { transition: transform 1.2s cubic-bezier(.2,.6,.2,1); }
+.tile .photo-frame, .side-art.photo-frame, .about-pair .photo-frame { overflow: hidden; }
+.tile:hover .photo-frame img, .about-pair .photo-frame:hover img { transform: scale(1.05); }
+.tile h3 { transition: color .35s; }
+.tile:hover h3 { color: var(--gold-bright); }
+
+/* richer section rhythm */
+section { padding: 110px 0; }
+.tile p { line-height: 1.9; }
+
+/* contact cards: gold accent bar */
+.contact-card { position: relative; overflow: hidden; }
+.contact-card::before {
+  content: ""; position: absolute; top: 0; left: 25%; right: 25%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+}
+
+/* footer mark */
+.foot-mark { height: 40px; width: auto; display: block; margin: 0 auto 16px; opacity: .95; }
+
+/* quote attribution ornament */
+.quote-band figcaption::before { content: "— "; color: var(--gold); }
+.quote-band figcaption::after { content: " —"; color: var(--gold); }
+
 /* ---------- responsive ---------- */
 @media (max-width: 900px) {
   .cards-2, .contact-cards, .split, .about-pair { grid-template-columns: 1fr; }
